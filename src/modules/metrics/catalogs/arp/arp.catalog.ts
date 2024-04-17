@@ -88,4 +88,96 @@ export const arpTable = {
         }
       ]
     }
+  };
+
+export interface RouterARPInterface {
+  "Cisco-IOS-XE-arp-oper:arp-data": {
+    "arp-vrf": [
+      {
+        "vrf": string,
+        "arp-oper": [
+          {
+            "address": string,
+            "enctype": string,
+            "interface": string,
+            "type": string,
+            "mode": string,
+            "hwtype": string,
+            "hardware": string,
+            "time": string
+          },
+          {
+            "address": string,
+            "enctype": string,
+            "interface": string,
+            "type": string,
+            "mode": string,
+            "hwtype": string,
+            "hardware": string,
+            "time": string
+          },
+          {
+            "address": string,
+            "enctype": string,
+            "interface": string,
+            "type": string,
+            "mode": string,
+            "hwtype": string,
+            "hardware": string,
+            "time": string
+          },
+          {
+            "address": string,
+            "enctype": string,
+            "interface": string,
+            "type": string,
+            "mode": string,
+            "hwtype": string,
+            "hardware": string,
+            "time": string
+          },
+          {
+            "address": string,
+            "enctype": string,
+            "interface": string,
+            "type": string,
+            "mode": string,
+            "hwtype": string,
+            "hardware": string,
+            "time": string
+          },
+          {
+            "address": string,
+            "enctype": string,
+            "interface": string,
+            "type": string,
+            "mode": string,
+            "hwtype": string,
+            "hardware": string,
+            "time": string
+          },
+          {
+            "address": string,
+            "enctype": string,
+            "interface": string,
+            "type": string,
+            "mode": string,
+            "hwtype": string,
+            "hardware": string,
+            "time": string
+          },
+          {
+            "address": string,
+            "enctype": string,
+            "interface": string,
+            "type": string,
+            "mode": string,
+            "hwtype": string,
+            "hardware": string,
+            "time": string
+          }
+        ]
+      }
+    ]
   }
+};

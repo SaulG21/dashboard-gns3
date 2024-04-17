@@ -1,13 +1,16 @@
-import { useState } from 'react'
-import "./index.css"
+import { Route, Switch, BrowserRouter } from "react-router-dom"
+import './index.css'
+import Dashboard from './modules/metrics/dashboard/screens/Dashboard'
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div className='flex flex-col w-full h-screen items-center justify-between'>
-        <p>hola tonotos</p>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/dashboard" component={Dashboard} />
+      </Switch>
+    </BrowserRouter>
   )
 }
 
