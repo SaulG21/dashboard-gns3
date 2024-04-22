@@ -1,24 +1,33 @@
 import Button from "@mui/material/Button";
-import { arpTable } from "../../catalogs/arp/arp.catalog";
 import { hostNameRouter, uniqueMAC, DataArpPops } from "../../functions/FindBoundaries"
 import { useEffect, useState } from "react";
-import { useFetch } from "use-http";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Dashboard() {
-
-    const { data, loading, error, get } = useFetch(':');
     const hostName = hostNameRouter;
     // const table = arpTable["Cisco-IOS-XE-arp-oper:arp-data"]["arp-vrf"][0]["arp-oper"];
     const [neighbor, setNeighbor] = useState<DataArpPops[]>([]);
 
-    const updateNeighbor = function () {
-        setNeighbor(uniqueMAC);
-    }
+    // const updateNeighbor = function () {
+    //     setNeighbor(uniqueMAC);
+    // }
 
-    useEffect(()=>{
-        get('/');
-    },[])
+    // useEffect(()=>{
+    //    fetch('http://localhost:4000/')
+    //    .then(response => response.json())
+    //    .then(data => console.log(data))
+    //    .then(err=>console.log(err))
+    // },[]);
+
+    const makeRequest = async ()=>{
+        const res = await fetch('http://localhost:4000/',
+            {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            }
+        );
+        console.log(res);
+    }
 
     return (
         <div className="flex h-full w-full justify-center items-center bg-gray-100">
@@ -27,7 +36,7 @@ export default function Dashboard() {
                     Topología de Red
                 </p>
                 <Button
-                    onClick={updateNeighbor}
+                    onClick={makeRequest}
                     variant="contained"
                 >
                     Ver informacion
@@ -40,7 +49,9 @@ export default function Dashboard() {
                                 neighbor ? (
                                     neighbor.map((item) => {
                                         return (
-                                            <div className="flex w-full flex-col my-2">
+                                            <div className="flex w-full flex-col my-2"
+                                                key={item.hardware}
+                                            >
                                                 <p>Direccion IP: {item.address}</p>
                                                 <p>Direccion MAC: {item.hardware}</p>
                                                 <p>Nombre Interfaz: {item.interface}</p>
@@ -53,17 +64,6 @@ export default function Dashboard() {
                         </div>
                     )
                 }
-                {
-                    loading || error ? (
-                        <CircularProgress
-                        />
-                    ):(
-                        <p>
-                            {data}
-                        </p>
-                    )
-                }
-
             </div>
         </div>
     );
