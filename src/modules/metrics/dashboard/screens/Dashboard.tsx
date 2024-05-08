@@ -1,53 +1,73 @@
 import Button from "@mui/material/Button";
-import { hostNameRouter, uniqueMAC, DataArpPops } from "../../functions/FindBoundaries"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import Graph from "../../../graphs/components/Graph2";
+import Graph from "../../../../modules/graphs/components/Graph";
 
 export default function Dashboard() {
-    const hostName = hostNameRouter;
-    // const table = arpTable["Cisco-IOS-XE-arp-oper:arp-data"]["arp-vrf"][0]["arp-oper"];
-    const [neighbor, setNeighbor] = useState<DataArpPops[]>([]);
+
     const [view, setView] = useState(false);
-
-    // const updateNeighbor = function () {
-    //     setNeighbor(uniqueMAC);
-    // }
-
-    // useEffect(()=>{
-    //    fetch('http://localhost:4000/')
-    //    .then(response => response.json())
-    //    .then(data => console.log(data))
-    //    .then(err=>console.log(err))
-    // },[]);
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState<any>({});
 
     const makeRequest = async () => {
-        const res = await fetch('http://localhost:4000/',
+        setLoading(true);
+        const response = await fetch('http://localhost:4000/functions/build-topology',
             {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
             }
         );
-        console.log(res);
+
+        const body = await response.json();
+        setData(body);
+        console.log(body);  
+        setView(true);
+        setLoading(false);
     }
 
     return (
-        <div className="flex h-full w-full justify-center items-center bg-gray-100">
-            <div className="flex flex-col w-full items-center justify-center space-y-3 border ">
+        <div className="flex flex-col h-full w-full justify-center items-center  bg-[#1976d2]">
+            <div className="flex py-5 w-full justify-center items-center">    
+                <h1 className="text-5xl text-white text-center -mt-24 font-bold  p-5 font-mono">
+                    Topología de núcleo de una red
+                </h1>
+            </div>
+            <div className="flex w-full items-center justify-center rounded space-x-6">
                 {
-                    view ? (
-                        <div className="flex flex-col w-full border">
-                            <Graph />
-                        </div>
+                    loading ? (
+                        <CircularProgress
+                            className="p-2"
+                            sx={{
+                                color: "white"
+                            }}
+                            size="70px"
+                        />
+                    ): view ? (
+                            <>
+                                <Graph
+                                    className="w-fullrounded-3xl"
+                                    data={data[0]}
+                                    arpData={data[1]}
+                                    onUpdate={makeRequest}
+                                />
+                            </>
                     ) : (
                         <>
-                            <p>Vecinos de router {hostName}: </p>
-                            <p>
-                                Topología de Red
-                            </p>
                             <Button
-                                onClick={()=>{setView(true)}}
-                                variant="contained"
+                                sx={{
+                                    background:"#fff",
+                                    textShadow:"initial",
+                                    textAnchor:"middle",
+                                    fontSize:"20px",
+                                    boxShadow:"unset",
+                                    "&:hover":{
+                                      background:"#3d3d3d",
+                                      color:"#fff"
+                                    }
+                                  }}
+                                  variant='text'
+                                  size='large'
+                                  onClick={makeRequest}
                             >
                                 Ver informacion
                             </Button>

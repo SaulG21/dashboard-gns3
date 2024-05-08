@@ -13,14 +13,21 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.17",
     "@mui/material": "^5.15.15",
+    "@types/cidr-matcher": "^2.1.2",
+    "@types/uuid": "^9.0.8",
+    "cidr-calc": "^1.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.3",
     "reagraph": "^4.17.2",
-    "use-http": "^1.0.28"
+    "use-http": "^1.0.28",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/ip": "^1.1.3",
+    "@types/node": "^20.12.11",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@types/react-router-dom": "^5.3.3",
