@@ -64,7 +64,7 @@ export default function Graph(props: GraphProps) {
             if (ip === inter) {
               let edge: GraphEdge = {
                 // id: `${router}->${item}`,
-                id: idEdge,
+                id: idEdge+uuidv4(),
                 source: `${router}`,
                 target: `${item}`,
                 label: idEdge,
@@ -97,13 +97,13 @@ export default function Graph(props: GraphProps) {
           nodes={nodes}
           edges={edges}
           ref={graphRef}
-          cameraMode='orbit'
+          cameraMode='rotate'
           selections={selections}
           onNodeClick={onNodeClick}
           onCanvasClick={onCanvasClick}
           actives={actives}
           onNodePointerOut={onNodePointerOut}
-          sizingType='centrality'
+          sizingType='pagerank'
           // edgeInterpolation='curved'
           layoutType='radialOut3d'
           layoutOverrides={{
@@ -128,41 +128,59 @@ export default function Graph(props: GraphProps) {
           }}
         />
       </div>
-      <div className="flex w-1/2 rounded-xl"
+      <div className="flex w-1/4 rounded-xl"
         style={{ height: 500 }}
       >
         <div className="
-                          w-full flex flex-col 
+                          w-full flex flex-col
+                          bg-gray-900
                           shadow-inner transition-all duration-150 
                           overflow-y-auto items-center space-y-2 p-2
                           "
         >
           {
-            Object.entries(props.data).map((item:any) => {
+            nodes.map((node) => {
+
+              
+
               return (
                 <div
-                  key={item[0] + uuidv4()}
-                  className="w-full flex flex-col px-3 py-2 rounded-md bg-white shadow-lg font-mono"
+                  key={uuidv4()}
+                  className="w-full flex flex-col px-3 py-2 rounded-md bg-white shadow-2xl font-mono"
+                  onClick={()=>{
+                    console.log(node.data['arp-table'])
+                  }}
                 >
                   <p className='text-[#3d3d3d] shadow shadow-inherit text-lg font-semibold'>
-                    {item[0]}
+                    {node.label}
                   </p>
                   <p className='text-[#3d3d3d]'>Interfaces: </p>
                   {
-                    item[1].interfaces.map((inter:any) => {
+                    node.data.data.interfaces.map((inter:any) => {
                       if (inter != "192.168.122.21") {
-
+                        node.data['arp-table'].map((item:any)=>{
+                          console.log(item.address)
+                          if (item.address == inter){
+                            console.log(item.address,inter)
+                          }
+                        })
                         return (
-                          <div
-                            className='flex px-2 py-1 space-x-2'
-                            key={inter + item[0]}
-                          >
-                            <LanIcon
-                              className="text-[#3d3d3d]"
-                            />
-                            <p className='text-[#3d3d3d]'>
-                              {inter}
-                            </p>
+                          <div className='flex items-center' key={inter+uuidv4()}>
+                            <div
+                              className='flex px-2 py-1 space-x-2'
+                            >
+                              <LanIcon
+                                className="text-[#3d3d3d]"
+                              />
+                              <p className='text-[#3d3d3d]'>
+                                {inter}
+                              </p>
+                            </div>
+                            <div className='flex items-center'>
+                              {}
+                              <p className='text-[#3d3d3d]'>
+                              </p>
+                            </div>
                           </div>
                         );
                       }
