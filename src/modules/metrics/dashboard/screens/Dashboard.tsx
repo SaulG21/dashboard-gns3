@@ -1,7 +1,7 @@
-import Button from "@mui/material/Button";
 import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import Graph from "../../../../modules/graphs/components/Graph";
+import Graph from "../../components/Graph";
+import BlackButton from "../../components/mui/ButtonBlack";
 
 export default function Dashboard() {
 
@@ -26,9 +26,9 @@ export default function Dashboard() {
     }
 
     return (
-        <div className="flex flex-col h-full w-full justify-center items-center  bg-[#1976d2]">
-            <div className="flex py-5 w-full justify-center items-center">    
-                <h1 className="text-5xl text-white text-center -mt-24 font-bold  p-5 font-mono">
+        <div className="flex flex-col h-full w-full justify-center items-center  bg-[#1976d2] overflow-y-auto min-h-[820px]">
+            <div className="flex lg:py-5 w-full justify-center items-center">    
+                <h1 className="text-3xl lg:text-5xl text-white text-center lg:-mt-24 font-bold px-5 font-mono">
                     Topología de núcleo de una red
                 </h1>
             </div>
@@ -53,24 +53,10 @@ export default function Dashboard() {
                             </>
                     ) : (
                         <>
-                            <Button
-                                sx={{
-                                    background:"#fff",
-                                    textShadow:"initial",
-                                    textAnchor:"middle",
-                                    fontSize:"20px",
-                                    boxShadow:"unset",
-                                    "&:hover":{
-                                      background:"#3d3d3d",
-                                      color:"#fff"
-                                    }
-                                  }}
-                                  variant='text'
-                                  size='large'
-                                  onClick={makeRequest}
-                            >
-                                Ver informacion
-                            </Button>
+                            <BlackButton
+                                label="Ver información"
+                                onClick={makeRequest}
+                            />
                         </>
                     )
                 }
