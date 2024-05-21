@@ -23,12 +23,12 @@ export default function RoutersList(props:RouterListProps) {
                         return (
                             <div
                                 key={uuidv4()}
-                                className="w-full flex flex-col px-3 py-2 rounded-md bg-white shadow-2xl font-mono"
+                                className="w-full flex flex-col px-3 py-2 rounded-md bg-[#3d3d3d] shadow-2xl font-mono"
                             >
-                                <p className='text-[#3d3d3d] shadow shadow-inherit lg:text-lg text-base font-semibold'>
+                                <p className='text-white shadow shadow-inherit lg:text-lg text-base font-semibold'>
                                     {node.label}
                                 </p>
-                                <p className='text-[#3d3d3d] text-sm'>Interfaces: </p>
+                                <p className='text-white text-sm'>Interfaces: </p>
                                 {
                                     node.data.data.interfaces.map((inter: any) => {
                                         let interfaceName = ""
@@ -46,12 +46,12 @@ export default function RoutersList(props:RouterListProps) {
                                                         className='flex px-2 py-1 space-x-2'
                                                     >
                                                         <LanIcon
-                                                            className="text-[#3d3d3d] text-sm lg:text-base"
+                                                            className="text-white text-sm lg:text-base"
                                                         />
-                                                        <p className='text-[#3d3d3d] text-sm lg:text-base'>
+                                                        <p className='text-white text-sm lg:text-base'>
                                                             {inter}
                                                         </p>
-                                                        <p className='text-[#3d3d3d] text-sm lg:text-base'>
+                                                        <p className='text-white text-sm lg:text-base'>
                                                             {interfaceName}
                                                         </p>
                                                     </div>

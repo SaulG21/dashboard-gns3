@@ -8,15 +8,17 @@ export interface ButtonProps{
 export default function BlackButton(props:ButtonProps) {
     return (
         <Button
+            className="shadow-xl"
             sx={{
-                background: "#fff",
+                background: "#3d3d3d",
+                color:"#fff",
                 textShadow: "initial",
                 textAnchor: "middle",
                 fontSize: "20px",
                 boxShadow: "unset",
                 "&:hover": {
-                    background: "#3d3d3d",
-                    color: "#fff"
+                    background: "#fff",
+                    color: "#1976D2"
                 },
                 paddingLeft:"10px",
                 paddingRight:"10px"
