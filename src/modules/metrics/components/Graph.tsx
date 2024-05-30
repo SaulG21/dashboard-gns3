@@ -112,7 +112,7 @@ export default function Graph(props: GraphProps) {
                         onCanvasClick={onCanvasClick}
                         actives={actives}
                         onNodePointerOut={onNodePointerOut}
-                        layoutType='radialOut3d'
+                        layoutType='forceDirected3d'
                         theme={darkTheme}
                         layoutOverrides={{
                             linkDistance: 150,
